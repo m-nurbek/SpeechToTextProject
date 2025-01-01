@@ -11,7 +11,7 @@ async def makeTranscription(file: UploadFile = File( ... )):
     if file.content_type not in ["audio/mpeg", "audio/mp4", "audio/mpeg", "audio/mpga", "audio/m4a", "audio/wav", "audio/webm"]:
         return {"error": "Invalid file type"}
     
-    filePath = f"./,cache/{file.filename}"
+    filePath = f"./.cache/{file.filename}"
     
     with open(filePath, "wb") as audio_file:
         content = await file.read()
