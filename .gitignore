@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Cache
+.cache/
+
+# Test Data
+data/
