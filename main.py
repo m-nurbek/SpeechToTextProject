@@ -2,8 +2,16 @@ import streamlit as st
 import time
 from model import transcribeVoiceContentToText
 from st_copy_to_clipboard import st_copy_to_clipboard
+from imageio_ffmpeg import get_ffmpeg_exe
+import os
+
+def add_ffmpeg_to_path():
+    ffmpeg_path = get_ffmpeg_exe()
+    os.environ["PATH"] += os.pathsep + os.path.dirname(ffmpeg_path)
 
 def main():
+    add_ffmpeg_to_path()
+    
     st.title("Speech2Text transcriber")
 
     # Custom CSS for ChatGPT-like response
