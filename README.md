@@ -8,6 +8,8 @@ This project provides an API endpoint to transcribe audio files into text using 
 - Transcribes the audio content to text.
 - Deletes the audio file after transcription.
 
+![User interface](image.png)
+
 ## Requirements
 
 - Python 3.9+
