@@ -81,3 +81,16 @@ with open(file_path, "rb") as f:
     response = requests.post(url, files=files)
 
 print(response.json())
+```
+
+## Docker
+
+1. Build the Docker image:
+```sh
+docker build -t speech-to-text-app .
+```
+
+2. Run the Docker container:
+```sh
+docker run -p 8501:8501 speech-to-text-app
+```

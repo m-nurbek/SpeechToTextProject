@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 import time
 from model import transcribeVoiceContentToText
 from st_copy_to_clipboard import st_copy_to_clipboard
@@ -29,15 +28,7 @@ def main():
     uploaded_file = st.file_uploader(label="", accept_multiple_files=False, type=["mpeg", "mp4", "mpga", "m4a", "wav", "webm"])
 
     if uploaded_file is not None:
-        file_path = f"./.cache/{uploaded_file.name}"
-
-        with open(file_path, "wb") as audio_file:
-            content = uploaded_file.read()
-            audio_file.write(content)
-            
-        audio_content = transcribeVoiceContentToText(file_path)
-        os.remove(file_path)
-        
+        audio_content = transcribeVoiceContentToText(uploaded_file)
         st.session_state.file_contents = audio_content
 
     st.header("Transcription:")
