@@ -2,9 +2,6 @@ import whisper
 from pydub import AudioSegment
 import io
 import numpy as np
-import streamlit as st
-import noisereduce as nr
-from scipy.signal import butter, lfilter
 
 def transcribeVoiceContentToText(audio_file):
     audio_waveform, _ = convertAudioFileToWaveForm(audio_file)
@@ -35,46 +32,3 @@ def convertAudioFileToWaveForm(audio_file):
     samples /= np.iinfo(audio.array_type).max
     
     return samples, audio.frame_rate
-
-
-def reduce_noise(waveform, sample_rate):
-    noise_profile = waveform[:sample_rate]
-    return nr.reduce_noise(y=waveform, sr=sample_rate, y_noise=noise_profile)
-
-
-def band_pass_filter_multilingual(waveform, sample_rate, lowcut=200, highcut=4000):
-    nyquist = 0.5 * sample_rate
-    low = lowcut / nyquist
-    high = highcut / nyquist
-    b, a = butter(1, [low, high], btype="band")
-    return lfilter(b, a, waveform)
-
-
-def trim_silence_waveform(waveform, threshold=0.01):
-    """
-    Trims silence from a waveform based on amplitude.
-    
-    Args:
-        waveform (np.ndarray): Input waveform.
-        sample_rate (int): Sampling rate of the audio.
-        threshold (float): Amplitude threshold for silence.
-    
-    Returns:
-        np.ndarray: Trimmed waveform.
-    """
-    # Find non-silent indices
-    non_silent_indices = np.where(np.abs(waveform) > threshold)[0]
-    if len(non_silent_indices) == 0:
-        return waveform  # Return original waveform if all is silent
-    
-    start, end = non_silent_indices[0], non_silent_indices[-1] + 1
-    return waveform[start:end]
-
-def pass_audio_pipeline(audio_file):
-    waveform, sample_rate = convertAudioFileToWaveForm(audio_file)
-    denoised_waveform = reduce_noise(waveform, sample_rate)
-    filtered_waveform = band_pass_filter_multilingual(denoised_waveform, sample_rate)
-    trimmed_waveform = trim_silence_waveform(filtered_waveform)
-    
-    return np.array(trimmed_waveform, dtype=np.float32)
-    
