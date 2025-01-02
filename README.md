@@ -10,10 +10,11 @@ This project provides an API endpoint to transcribe audio files into text using 
 
 ## Requirements
 
-- Python 3.7+
+- Python 3.9+
 - FastAPI
-- Whisper
+- Openai-whisper
 - Uvicorn
+- Streamlit
 
 ## Installation
 
@@ -52,6 +53,16 @@ This project provides an API endpoint to transcribe audio files into text using 
     ```
 
     Replace `/path/to/your/audiofile.mp3` with the path to your audio file.
+
+## Run in streamlit
+
+1. Run the streamlit application:
+```sh
+streamlit run main.py --server.headless true
+```
+
+2. Open the url in a browser
+
 
 ## Example
 
