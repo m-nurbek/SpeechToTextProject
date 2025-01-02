@@ -8,16 +8,7 @@ def main():
 
     # Custom CSS for ChatGPT-like response
     st.markdown("""
-        <style>
-        .chat-response {
-            background-color: #f1f1f1;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 10px 0;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-        
+        <style>        
         .st-emotion-cache-1gulkj5 {
             width: 100%;
             padding: 5em 2em;
