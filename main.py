@@ -32,7 +32,7 @@ def main():
         for word in words:
             output_text += word + " "
             placeholder.markdown(f"<div class='chat-response'>{output_text}</div>", unsafe_allow_html=True)
-            time.sleep(0.05)
+            time.sleep(0.002)
         st_copy_to_clipboard(full_text)
         
     else:
